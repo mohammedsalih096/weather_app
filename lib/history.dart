@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task1/controllers/theme_controller.dart';
+import 'package:task1/widgets/current_day.dart';
+import 'package:task1/widgets/current_time.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -50,26 +52,14 @@ class HistoryPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  "Wednesday",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: isDarkMode
-                                          ? Color(0xffFFFFFF)
-                                          : Color(0xff245B82)),
-                                ),
+                                CurrentDay(),
                                 Text("India",
                                     style: TextStyle(
                                         fontSize: 20,
                                         color: isDarkMode
                                             ? Color(0xffFFFFFF)
                                             : Color(0xff245B82))),
-                                Text("8.37 AM",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: isDarkMode
-                                            ? Color(0xffFFFFFF)
-                                            : Color(0xff245B82))),
+                                CurrentTime()
                               ],
                             )),
                       ),

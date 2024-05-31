@@ -4,6 +4,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:task1/controllers/theme_controller.dart';
 import 'package:task1/weather_sevices.dart';
+import 'package:task1/widgets/current_day.dart';
+import 'package:task1/widgets/current_time.dart';
 import 'package:task1/widgets/drawer.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -97,12 +99,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
       int? humidity;
       double? windSpeed;
       String? description;
+      int? pressure;
       if (weatherData != null) {
         double temperatureKelvin = weatherData!['main']['temp'];
         temperatureCelsius = temperatureKelvin - 273.15;
         humidity = weatherData!['main']['humidity'];
         windSpeed = weatherData!['wind']['speed'];
         description = weatherData!['weather'][0]['description'];
+        pressure = weatherData!["main"]["pressure"];
       }
 
       return Scaffold(
@@ -239,8 +243,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                         : Color(0xff245B82),
                                   ),
                                   Text(
-                                    humidity != null
-                                        ? "${humidity}%"
+                                    pressure != null
+                                        ? "${pressure}%"
                                         : "Loading",
                                     style: TextStyle(
                                       fontSize: 19,
@@ -335,14 +339,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  "09:00AM",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    color: isDarkMode
-                                        ? Color(0xffFFFFFF)
-                                        : Color(0xff245B82),
-                                  ),
+                                CurrentTime(
+                                  style: TextStyle(fontSize: 24),
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -462,24 +460,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    "Wed",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: isDarkMode
-                                          ? Color(0xffFFFFFF)
-                                          : Color(0xff245B82),
-                                    ),
-                                  ),
-                                  Text(
-                                    "9 PM",
-                                    style: TextStyle(
-                                      fontSize: 19,
-                                      color: isDarkMode
-                                          ? Color(0xffFFFFFF)
-                                          : Color(0xff245B82),
-                                    ),
-                                  ),
+                                  CurrentDay(),
+                                  CurrentTime(
+                                    style: TextStyle(fontSize: 15),
+                                  )
                                 ],
                               ),
                             ),
